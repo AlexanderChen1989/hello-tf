@@ -64,3 +64,97 @@ class Infer(object):
             infer__pb2.InferResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class ProcessStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.PreProcess = channel.unary_unary(
+                '/infer.Process/PreProcess',
+                request_serializer=infer__pb2.PreProcessRequest.SerializeToString,
+                response_deserializer=infer__pb2.PreProcessResponse.FromString,
+                )
+        self.PostProcess = channel.unary_unary(
+                '/infer.Process/PostProcess',
+                request_serializer=infer__pb2.PostProcessRequest.SerializeToString,
+                response_deserializer=infer__pb2.PostProcessResponse.FromString,
+                )
+
+
+class ProcessServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def PreProcess(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostProcess(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_ProcessServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'PreProcess': grpc.unary_unary_rpc_method_handler(
+                    servicer.PreProcess,
+                    request_deserializer=infer__pb2.PreProcessRequest.FromString,
+                    response_serializer=infer__pb2.PreProcessResponse.SerializeToString,
+            ),
+            'PostProcess': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostProcess,
+                    request_deserializer=infer__pb2.PostProcessRequest.FromString,
+                    response_serializer=infer__pb2.PostProcessResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'infer.Process', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class Process(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def PreProcess(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/infer.Process/PreProcess',
+            infer__pb2.PreProcessRequest.SerializeToString,
+            infer__pb2.PreProcessResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostProcess(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/infer.Process/PostProcess',
+            infer__pb2.PostProcessRequest.SerializeToString,
+            infer__pb2.PostProcessResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

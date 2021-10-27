@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0binfer.proto\x12\x05infer\"+\n\x0cInferRequest\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\",\n\rInferResponse\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\x32;\n\x05Infer\x12\x32\n\x05Infer\x12\x13.infer.InferRequest\x1a\x14.infer.InferResponseb\x06proto3'
+  serialized_pb=b'\n\x0binfer.proto\x12\x05infer\"+\n\x0cInferRequest\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\",\n\rInferResponse\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\"\"\n\x11PreProcessRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"1\n\x12PreProcessResponse\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\"1\n\x12PostProcessRequest\x12\r\n\x05shape\x18\x01 \x03(\x04\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\x02\"p\n\x13PostProcessResponse\x12.\n\x05preds\x18\x01 \x03(\x0b\x32\x1f.infer.PostProcessResponse.Pred\x1a)\n\x04Pred\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0bprobability\x18\x02 \x01(\x02\x32;\n\x05Infer\x12\x32\n\x05Infer\x12\x13.infer.InferRequest\x1a\x14.infer.InferResponse2\x92\x01\n\x07Process\x12\x41\n\nPreProcess\x12\x18.infer.PreProcessRequest\x1a\x19.infer.PreProcessResponse\x12\x44\n\x0bPostProcess\x12\x19.infer.PostProcessRequest\x1a\x1a.infer.PostProcessResponseb\x06proto3'
 )
 
 
@@ -102,8 +102,194 @@ _INFERRESPONSE = _descriptor.Descriptor(
   serialized_end=111,
 )
 
+
+_PREPROCESSREQUEST = _descriptor.Descriptor(
+  name='PreProcessRequest',
+  full_name='infer.PreProcessRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='image', full_name='infer.PreProcessRequest.image', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=113,
+  serialized_end=147,
+)
+
+
+_PREPROCESSRESPONSE = _descriptor.Descriptor(
+  name='PreProcessResponse',
+  full_name='infer.PreProcessResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='shape', full_name='infer.PreProcessResponse.shape', index=0,
+      number=1, type=4, cpp_type=4, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='infer.PreProcessResponse.data', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=149,
+  serialized_end=198,
+)
+
+
+_POSTPROCESSREQUEST = _descriptor.Descriptor(
+  name='PostProcessRequest',
+  full_name='infer.PostProcessRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='shape', full_name='infer.PostProcessRequest.shape', index=0,
+      number=1, type=4, cpp_type=4, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='infer.PostProcessRequest.data', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=200,
+  serialized_end=249,
+)
+
+
+_POSTPROCESSRESPONSE_PRED = _descriptor.Descriptor(
+  name='Pred',
+  full_name='infer.PostProcessResponse.Pred',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='infer.PostProcessResponse.Pred.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='probability', full_name='infer.PostProcessResponse.Pred.probability', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=322,
+  serialized_end=363,
+)
+
+_POSTPROCESSRESPONSE = _descriptor.Descriptor(
+  name='PostProcessResponse',
+  full_name='infer.PostProcessResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='preds', full_name='infer.PostProcessResponse.preds', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_POSTPROCESSRESPONSE_PRED, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=251,
+  serialized_end=363,
+)
+
+_POSTPROCESSRESPONSE_PRED.containing_type = _POSTPROCESSRESPONSE
+_POSTPROCESSRESPONSE.fields_by_name['preds'].message_type = _POSTPROCESSRESPONSE_PRED
 DESCRIPTOR.message_types_by_name['InferRequest'] = _INFERREQUEST
 DESCRIPTOR.message_types_by_name['InferResponse'] = _INFERRESPONSE
+DESCRIPTOR.message_types_by_name['PreProcessRequest'] = _PREPROCESSREQUEST
+DESCRIPTOR.message_types_by_name['PreProcessResponse'] = _PREPROCESSRESPONSE
+DESCRIPTOR.message_types_by_name['PostProcessRequest'] = _POSTPROCESSREQUEST
+DESCRIPTOR.message_types_by_name['PostProcessResponse'] = _POSTPROCESSRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 InferRequest = _reflection.GeneratedProtocolMessageType('InferRequest', (_message.Message,), {
@@ -120,6 +306,42 @@ InferResponse = _reflection.GeneratedProtocolMessageType('InferResponse', (_mess
   })
 _sym_db.RegisterMessage(InferResponse)
 
+PreProcessRequest = _reflection.GeneratedProtocolMessageType('PreProcessRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PREPROCESSREQUEST,
+  '__module__' : 'infer_pb2'
+  # @@protoc_insertion_point(class_scope:infer.PreProcessRequest)
+  })
+_sym_db.RegisterMessage(PreProcessRequest)
+
+PreProcessResponse = _reflection.GeneratedProtocolMessageType('PreProcessResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PREPROCESSRESPONSE,
+  '__module__' : 'infer_pb2'
+  # @@protoc_insertion_point(class_scope:infer.PreProcessResponse)
+  })
+_sym_db.RegisterMessage(PreProcessResponse)
+
+PostProcessRequest = _reflection.GeneratedProtocolMessageType('PostProcessRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTPROCESSREQUEST,
+  '__module__' : 'infer_pb2'
+  # @@protoc_insertion_point(class_scope:infer.PostProcessRequest)
+  })
+_sym_db.RegisterMessage(PostProcessRequest)
+
+PostProcessResponse = _reflection.GeneratedProtocolMessageType('PostProcessResponse', (_message.Message,), {
+
+  'Pred' : _reflection.GeneratedProtocolMessageType('Pred', (_message.Message,), {
+    'DESCRIPTOR' : _POSTPROCESSRESPONSE_PRED,
+    '__module__' : 'infer_pb2'
+    # @@protoc_insertion_point(class_scope:infer.PostProcessResponse.Pred)
+    })
+  ,
+  'DESCRIPTOR' : _POSTPROCESSRESPONSE,
+  '__module__' : 'infer_pb2'
+  # @@protoc_insertion_point(class_scope:infer.PostProcessResponse)
+  })
+_sym_db.RegisterMessage(PostProcessResponse)
+_sym_db.RegisterMessage(PostProcessResponse.Pred)
+
 
 
 _INFER = _descriptor.ServiceDescriptor(
@@ -129,8 +351,8 @@ _INFER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=113,
-  serialized_end=172,
+  serialized_start=365,
+  serialized_end=424,
   methods=[
   _descriptor.MethodDescriptor(
     name='Infer',
@@ -146,5 +368,41 @@ _INFER = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_INFER)
 
 DESCRIPTOR.services_by_name['Infer'] = _INFER
+
+
+_PROCESS = _descriptor.ServiceDescriptor(
+  name='Process',
+  full_name='infer.Process',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=427,
+  serialized_end=573,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='PreProcess',
+    full_name='infer.Process.PreProcess',
+    index=0,
+    containing_service=None,
+    input_type=_PREPROCESSREQUEST,
+    output_type=_PREPROCESSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='PostProcess',
+    full_name='infer.Process.PostProcess',
+    index=1,
+    containing_service=None,
+    input_type=_POSTPROCESSREQUEST,
+    output_type=_POSTPROCESSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_PROCESS)
+
+DESCRIPTOR.services_by_name['Process'] = _PROCESS
 
 # @@protoc_insertion_point(module_scope)

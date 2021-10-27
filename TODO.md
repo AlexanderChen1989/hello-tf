@@ -9,3 +9,4 @@
   * 生成客户端：`python -m grpc_tools.protoc -I../proto --python_out=. --grpc_python_out=. ../proto/infer.proto`
   * 用客户端调用grpc服务
 * 校验调用结果和本地推理结果
+* 添加页面
