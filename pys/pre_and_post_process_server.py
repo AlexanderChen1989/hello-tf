@@ -34,7 +34,6 @@ class Processer(infer_pb2_grpc.ProcessServicer):
     def PostProcess(self, request, context):
         preds = np.array(request.data).astype(np.float32).reshape(
             request.shape)
-        print('>>>', preds.shape, preds.dtype)
         preds = decode_predictions(preds, top=3)[0]
         preds = [Pred(name=name, probability=p) for _, name, p in preds]
 
