@@ -10,7 +10,7 @@ use axum::{
     routing::get,
     AddExtensionLayer, Json, Router,
 };
-use std::{fs, iter::Iterator};
+use std::iter::Iterator;
 use tonic::transport::Channel;
 
 use serde::Deserialize;
@@ -37,13 +37,11 @@ fn main() {
                 .unwrap(),
         };
 
-        // build our application with some routes
         let app = Router::new()
             .route("/", get(show_form).post(classify_image))
             .layer(AddExtensionLayer::new(clients))
             .layer(tower_http::trace::TraceLayer::new_for_http());
 
-        // run it with hyper
         let addr = "0.0.0.0:3000".parse().unwrap();
         tracing::info!("listening on {}", addr);
         axum::Server::bind(&addr)
@@ -53,22 +51,10 @@ fn main() {
     });
 }
 
-async fn show_form() -> Html<String> {
-	let data = fs::read("templates/upload.html").unwrap();
-	let s = String::from_utf8(data).unwrap();
-	Html(s)
-}
+async fn show_form() -> Html<&'static str> {
+    let html = std::include_str!("upload_form.html");
 
-#[derive(Serialize, Deserialize)]
-struct Pred {
-    name: String,
-    probability: f32,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Preds {
-    image: String,
-    preds: Vec<Pred>,
+    Html(html)
 }
 
 async fn classify_image(
@@ -103,19 +89,12 @@ async fn classify_image(
     Json(results)
 }
 
-async fn pre_process(
-    cli: &mut ProcessClient<Channel>,
-    data: &[u8],
-) -> PreProcessResponse {
+async fn pre_process(cli: &mut ProcessClient<Channel>, data: &[u8]) -> PreProcessResponse {
     let req = PreProcessRequest { image: data.into() };
     cli.pre_process(req).await.unwrap().into_inner()
 }
 
-async fn infer(
-    cli: &mut InferClient<Channel>,
-    shape: Vec<u64>,
-    data: Vec<f32>,
-) -> InferResponse {
+async fn infer(cli: &mut InferClient<Channel>, shape: Vec<u64>, data: Vec<f32>) -> InferResponse {
     let req = InferRequest { shape, data };
     cli.infer(req).await.unwrap().into_inner()
 }
@@ -127,4 +106,16 @@ async fn post_process(
 ) -> PostProcessResponse {
     let req = PostProcessRequest { shape, data };
     cli.post_process(req).await.unwrap().into_inner()
+}
+
+#[derive(Serialize, Deserialize)]
+struct Pred {
+    name: String,
+    probability: f32,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Preds {
+    image: String,
+    preds: Vec<Pred>,
 }

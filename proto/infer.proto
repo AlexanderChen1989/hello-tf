@@ -31,16 +31,35 @@ message PostProcessRequest {
 	repeated float data = 2;
 }
 
+message Pred {
+	string name = 1;
+	float probability = 2;
+}
+
 message PostProcessResponse {
 	repeated Pred preds = 1;
 
-	message Pred {
-		string name = 1;
-		float probability = 2;
-	}
 }
 
 service Process {
 	rpc PreProcess (PreProcessRequest) returns (PreProcessResponse);
 	rpc PostProcess (PostProcessRequest) returns (PostProcessResponse);
+}
+
+
+message Image {
+	string filename = 1;
+	bytes body = 2;
+}
+
+message WebRequest {
+	repeated Image images = 1;
+}
+
+message WebResponse {
+	repeated Pred preds = 1;
+}
+
+service web {
+	rpc Handle(WebRequest) returns (WebResponse);
 }
