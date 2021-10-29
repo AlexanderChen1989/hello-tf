@@ -25,7 +25,7 @@ class Processer(infer_pb2_grpc.ProcessServicer):
         img = Image.open(io.BytesIO(request.image))
         img = img.convert('RGB')
         resample = _PIL_INTERPOLATION_METHODS['nearest']
-        img = img.resize((224, 224), resample)
+        img = img.resize((600, 600), resample)
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
