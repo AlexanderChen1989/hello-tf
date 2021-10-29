@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hello</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <input
+      type="file"
+      id="fileElem"
+      multiple
+      accept="image/*"
+      style="display: none"
+    />
+    <a href="#" id="fileSelect">选择文件</a>
+    <div id="fileList">
+      <p>尚未选择文件！</p>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="infer_pb.js"></script>
+    <script src="infer_grpc_web_pb.js"></script>
+  </body>
+</html>

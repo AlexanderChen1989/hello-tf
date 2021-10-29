@@ -56,10 +56,15 @@ message WebRequest {
 	repeated Image images = 1;
 }
 
-message WebResponse {
-	repeated Pred preds = 1;
+message ImagePreds {
+	string image = 1;
+	repeated Pred preds = 2;
 }
 
-service web {
-	rpc Handle(WebRequest) returns (WebResponse);
+message WebResponse {
+	repeated ImagePreds results = 1;
+}
+
+service Web {
+	rpc Process(WebRequest) returns (WebResponse);
 }

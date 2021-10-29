@@ -56,9 +56,16 @@ pub struct WebRequest {
     pub images: ::prost::alloc::vec::Vec<Image>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImagePreds {
+    #[prost(string, tag = "1")]
+    pub image: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "2")]
+    pub preds: ::prost::alloc::vec::Vec<Pred>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebResponse {
     #[prost(message, repeated, tag = "1")]
-    pub preds: ::prost::alloc::vec::Vec<Pred>,
+    pub results: ::prost::alloc::vec::Vec<ImagePreds>,
 }
 #[doc = r" Generated client implementations."]
 pub mod infer_client {
@@ -283,7 +290,7 @@ pub mod web_client {
             self.inner = self.inner.accept_gzip();
             self
         }
-        pub async fn handle(
+        pub async fn process(
             &mut self,
             request: impl tonic::IntoRequest<super::WebRequest>,
         ) -> Result<tonic::Response<super::WebResponse>, tonic::Status> {
@@ -294,7 +301,7 @@ pub mod web_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/infer.web/Handle");
+            let path = http::uri::PathAndQuery::from_static("/infer.Web/Process");
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
@@ -575,7 +582,7 @@ pub mod web_server {
     #[doc = "Generated trait containing gRPC methods that should be implemented for use with WebServer."]
     #[async_trait]
     pub trait Web: Send + Sync + 'static {
-        async fn handle(
+        async fn process(
             &self,
             request: tonic::Request<super::WebRequest>,
         ) -> Result<tonic::Response<super::WebResponse>, tonic::Status>;
@@ -619,10 +626,10 @@ pub mod web_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/infer.web/Handle" => {
+                "/infer.Web/Process" => {
                     #[allow(non_camel_case_types)]
-                    struct HandleSvc<T: Web>(pub Arc<T>);
-                    impl<T: Web> tonic::server::UnaryService<super::WebRequest> for HandleSvc<T> {
+                    struct ProcessSvc<T: Web>(pub Arc<T>);
+                    impl<T: Web> tonic::server::UnaryService<super::WebRequest> for ProcessSvc<T> {
                         type Response = super::WebResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
@@ -630,7 +637,7 @@ pub mod web_server {
                             request: tonic::Request<super::WebRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).handle(request).await };
+                            let fut = async move { (*inner).process(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -639,7 +646,7 @@ pub mod web_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = HandleSvc(inner);
+                        let method = ProcessSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -682,6 +689,6 @@ pub mod web_server {
         }
     }
     impl<T: Web> tonic::transport::NamedService for WebServer<T> {
-        const NAME: &'static str = "infer.web";
+        const NAME: &'static str = "infer.Web";
     }
 }
