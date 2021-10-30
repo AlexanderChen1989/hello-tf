@@ -46,23 +46,12 @@ service Process {
 	rpc PostProcess (PostProcessRequest) returns (PostProcessResponse);
 }
 
-
-message Image {
-	string filename = 1;
-	bytes body = 2;
-}
-
 message WebRequest {
-	repeated Image images = 1;
-}
-
-message ImagePreds {
-	string image = 1;
-	repeated Pred preds = 2;
+	bytes image = 1;
 }
 
 message WebResponse {
-	repeated ImagePreds results = 1;
+	repeated Pred preds = 1;
 }
 
 service Web {

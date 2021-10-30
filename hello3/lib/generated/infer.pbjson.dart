@@ -83,45 +83,23 @@ const PostProcessResponse$json = const {
 
 /// Descriptor for `PostProcessResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List postProcessResponseDescriptor = $convert.base64Decode('ChNQb3N0UHJvY2Vzc1Jlc3BvbnNlEiEKBXByZWRzGAEgAygLMgsuaW5mZXIuUHJlZFIFcHJlZHM=');
-@$core.Deprecated('Use imageDescriptor instead')
-const Image$json = const {
-  '1': 'Image',
-  '2': const [
-    const {'1': 'filename', '3': 1, '4': 1, '5': 9, '10': 'filename'},
-    const {'1': 'body', '3': 2, '4': 1, '5': 12, '10': 'body'},
-  ],
-};
-
-/// Descriptor for `Image`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageDescriptor = $convert.base64Decode('CgVJbWFnZRIaCghmaWxlbmFtZRgBIAEoCVIIZmlsZW5hbWUSEgoEYm9keRgCIAEoDFIEYm9keQ==');
 @$core.Deprecated('Use webRequestDescriptor instead')
 const WebRequest$json = const {
   '1': 'WebRequest',
   '2': const [
-    const {'1': 'images', '3': 1, '4': 3, '5': 11, '6': '.infer.Image', '10': 'images'},
+    const {'1': 'image', '3': 1, '4': 1, '5': 12, '10': 'image'},
   ],
 };
 
 /// Descriptor for `WebRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List webRequestDescriptor = $convert.base64Decode('CgpXZWJSZXF1ZXN0EiQKBmltYWdlcxgBIAMoCzIMLmluZmVyLkltYWdlUgZpbWFnZXM=');
-@$core.Deprecated('Use imagePredsDescriptor instead')
-const ImagePreds$json = const {
-  '1': 'ImagePreds',
-  '2': const [
-    const {'1': 'image', '3': 1, '4': 1, '5': 9, '10': 'image'},
-    const {'1': 'preds', '3': 2, '4': 3, '5': 11, '6': '.infer.Pred', '10': 'preds'},
-  ],
-};
-
-/// Descriptor for `ImagePreds`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imagePredsDescriptor = $convert.base64Decode('CgpJbWFnZVByZWRzEhQKBWltYWdlGAEgASgJUgVpbWFnZRIhCgVwcmVkcxgCIAMoCzILLmluZmVyLlByZWRSBXByZWRz');
+final $typed_data.Uint8List webRequestDescriptor = $convert.base64Decode('CgpXZWJSZXF1ZXN0EhQKBWltYWdlGAEgASgMUgVpbWFnZQ==');
 @$core.Deprecated('Use webResponseDescriptor instead')
 const WebResponse$json = const {
   '1': 'WebResponse',
   '2': const [
-    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.infer.ImagePreds', '10': 'results'},
+    const {'1': 'preds', '3': 1, '4': 3, '5': 11, '6': '.infer.Pred', '10': 'preds'},
   ],
 };
 
 /// Descriptor for `WebResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List webResponseDescriptor = $convert.base64Decode('CgtXZWJSZXNwb25zZRIrCgdyZXN1bHRzGAEgAygLMhEuaW5mZXIuSW1hZ2VQcmVkc1IHcmVzdWx0cw==');
+final $typed_data.Uint8List webResponseDescriptor = $convert.base64Decode('CgtXZWJSZXNwb25zZRIhCgVwcmVkcxgBIAMoCzILLmluZmVyLlByZWRSBXByZWRz');

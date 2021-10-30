@@ -44,28 +44,14 @@ pub struct PostProcessResponse {
     pub preds: ::prost::alloc::vec::Vec<Pred>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Image {
-    #[prost(string, tag = "1")]
-    pub filename: ::prost::alloc::string::String,
-    #[prost(bytes = "vec", tag = "2")]
-    pub body: ::prost::alloc::vec::Vec<u8>,
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebRequest {
-    #[prost(message, repeated, tag = "1")]
-    pub images: ::prost::alloc::vec::Vec<Image>,
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ImagePreds {
-    #[prost(string, tag = "1")]
-    pub image: ::prost::alloc::string::String,
-    #[prost(message, repeated, tag = "2")]
-    pub preds: ::prost::alloc::vec::Vec<Pred>,
+    #[prost(bytes = "vec", tag = "1")]
+    pub image: ::prost::alloc::vec::Vec<u8>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebResponse {
     #[prost(message, repeated, tag = "1")]
-    pub results: ::prost::alloc::vec::Vec<ImagePreds>,
+    pub preds: ::prost::alloc::vec::Vec<Pred>,
 }
 #[doc = r" Generated client implementations."]
 pub mod infer_client {

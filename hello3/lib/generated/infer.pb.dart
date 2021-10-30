@@ -355,80 +355,19 @@ class PostProcessResponse extends $pb.GeneratedMessage {
   $core.List<Pred> get preds => $_getList(0);
 }
 
-class Image extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Image', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infer'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'filename')
-    ..a<$core.List<$core.int>>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'body', $pb.PbFieldType.OY)
-    ..hasRequiredFields = false
-  ;
-
-  Image._() : super();
-  factory Image({
-    $core.String? filename,
-    $core.List<$core.int>? body,
-  }) {
-    final _result = create();
-    if (filename != null) {
-      _result.filename = filename;
-    }
-    if (body != null) {
-      _result.body = body;
-    }
-    return _result;
-  }
-  factory Image.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Image.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Image clone() => Image()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Image copyWith(void Function(Image) updates) => super.copyWith((message) => updates(message as Image)) as Image; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Image create() => Image._();
-  Image createEmptyInstance() => create();
-  static $pb.PbList<Image> createRepeated() => $pb.PbList<Image>();
-  @$core.pragma('dart2js:noInline')
-  static Image getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Image>(create);
-  static Image? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get filename => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set filename($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasFilename() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFilename() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<$core.int> get body => $_getN(1);
-  @$pb.TagNumber(2)
-  set body($core.List<$core.int> v) { $_setBytes(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasBody() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBody() => clearField(2);
-}
-
 class WebRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'WebRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infer'), createEmptyInstance: create)
-    ..pc<Image>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: Image.create)
+    ..a<$core.List<$core.int>>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'image', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
   WebRequest._() : super();
   factory WebRequest({
-    $core.Iterable<Image>? images,
+    $core.List<$core.int>? image,
   }) {
     final _result = create();
-    if (images != null) {
-      _result.images.addAll(images);
+    if (image != null) {
+      _result.image = image;
     }
     return _result;
   }
@@ -454,77 +393,28 @@ class WebRequest extends $pb.GeneratedMessage {
   static WebRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<Image> get images => $_getList(0);
-}
-
-class ImagePreds extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImagePreds', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infer'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'image')
-    ..pc<Pred>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'preds', $pb.PbFieldType.PM, subBuilder: Pred.create)
-    ..hasRequiredFields = false
-  ;
-
-  ImagePreds._() : super();
-  factory ImagePreds({
-    $core.String? image,
-    $core.Iterable<Pred>? preds,
-  }) {
-    final _result = create();
-    if (image != null) {
-      _result.image = image;
-    }
-    if (preds != null) {
-      _result.preds.addAll(preds);
-    }
-    return _result;
-  }
-  factory ImagePreds.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ImagePreds.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ImagePreds clone() => ImagePreds()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ImagePreds copyWith(void Function(ImagePreds) updates) => super.copyWith((message) => updates(message as ImagePreds)) as ImagePreds; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ImagePreds create() => ImagePreds._();
-  ImagePreds createEmptyInstance() => create();
-  static $pb.PbList<ImagePreds> createRepeated() => $pb.PbList<ImagePreds>();
-  @$core.pragma('dart2js:noInline')
-  static ImagePreds getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImagePreds>(create);
-  static ImagePreds? _defaultInstance;
-
+  $core.List<$core.int> get image => $_getN(0);
   @$pb.TagNumber(1)
-  $core.String get image => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set image($core.String v) { $_setString(0, v); }
+  set image($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasImage() => $_has(0);
   @$pb.TagNumber(1)
   void clearImage() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<Pred> get preds => $_getList(1);
 }
 
 class WebResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'WebResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infer'), createEmptyInstance: create)
-    ..pc<ImagePreds>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'results', $pb.PbFieldType.PM, subBuilder: ImagePreds.create)
+    ..pc<Pred>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'preds', $pb.PbFieldType.PM, subBuilder: Pred.create)
     ..hasRequiredFields = false
   ;
 
   WebResponse._() : super();
   factory WebResponse({
-    $core.Iterable<ImagePreds>? results,
+    $core.Iterable<Pred>? preds,
   }) {
     final _result = create();
-    if (results != null) {
-      _result.results.addAll(results);
+    if (preds != null) {
+      _result.preds.addAll(preds);
     }
     return _result;
   }
@@ -550,6 +440,6 @@ class WebResponse extends $pb.GeneratedMessage {
   static WebResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<ImagePreds> get results => $_getList(0);
+  $core.List<Pred> get preds => $_getList(0);
 }
 

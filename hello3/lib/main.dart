@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ImagePicker _picker = ImagePicker();
   final _cli = infer.WebClient(
     ClientChannel(
       '192.168.5.27',
@@ -44,14 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   );
 
-  var _info;
+  var _preds;
   var _image;
 
-  final ImagePicker _picker = ImagePicker();
-
-  void _incrementCounter() async {
-    XFile? image = await _picker.pickImage(
-        source: ImageSource.camera, maxHeight: 800, maxWidth: 800);
+  void _pickPhoto(ImageSource source) async {
+    XFile? image =
+        await _picker.pickImage(source: source, maxHeight: 800, maxWidth: 800);
 
     if (image == null) {
       return;
@@ -60,24 +59,21 @@ class _MyHomePageState extends State<MyHomePage> {
       _image = File(image.path);
     });
 
-    var res = await _cli.process(infer.WebRequest(images: [
-      infer.Image(
-        filename: image.name,
-        body: await image.readAsBytes(),
-      )
-    ]));
+    var res = await _cli.process(
+      infer.WebRequest(
+        image: await image.readAsBytes(),
+      ),
+    );
 
     setState(() {
-      _info = res;
+      _preds = res.preds;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var preds;
-    if (_info != null) {
-      preds = _info.results[0].preds;
-    }
+    var preds = _preds;
+    var textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -92,15 +88,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Text(
                           "${preds[0].name}   ${preds[0].probability.toStringAsFixed(3)}",
-                          style: Theme.of(context).textTheme.headline5,
+                          style: textStyle,
                         ),
                         Text(
                           "${preds[1].name}   ${preds[1].probability.toStringAsFixed(3)}",
-                          style: Theme.of(context).textTheme.headline6,
+                          style: textStyle,
                         ),
                         Text(
                           "${preds[2].name}   ${preds[2].probability.toStringAsFixed(3)}",
-                          style: Theme.of(context).textTheme.headline6,
+                          style: textStyle,
                         ),
                       ],
                     )
@@ -113,15 +109,41 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 400,
                       height: 400,
                     )
-                  : const Text("点击下面按钮，拍只动物试试！"),
+                  : const Text("点击下面按钮试试！"),
             ),
+            ButtonBar(
+              buttonPadding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              alignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(10.0),
+                    primary: Colors.white,
+                    backgroundColor: Colors.green,
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  onPressed: () {
+                    _pickPhoto(ImageSource.camera);
+                  },
+                  child: const Text('拍照'),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(10.0),
+                    primary: Colors.white,
+                    backgroundColor: Colors.blue,
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  onPressed: () {
+                    _pickPhoto(ImageSource.gallery);
+                  },
+                  child: const Text('选择图片'),
+                ),
+              ],
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.camera_enhance),
       ),
     );
   }
