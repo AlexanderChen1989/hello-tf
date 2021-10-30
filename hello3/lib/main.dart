@@ -6,8 +6,6 @@ import 'package:image_picker/image_picker.dart';
 
 import 'generated/infer.pbgrpc.dart' as infer;
 
-import 'package:dio/dio.dart' as dio;
-
 void main() {
   runApp(const MyApp());
 }
@@ -38,6 +36,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _cli = infer.WebClient(
+    ClientChannel(
+      '192.168.5.27',
+      port: 3001,
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    ),
+  );
+
   var _info;
   var _image;
 
@@ -50,14 +56,19 @@ class _MyHomePageState extends State<MyHomePage> {
     if (image == null) {
       return;
     }
-    
     setState(() {
       _image = File(image.path);
     });
 
-    
+    var res = await _cli.process(infer.WebRequest(images: [
+      infer.Image(
+        filename: image.name,
+        body: await image.readAsBytes(),
+      )
+    ]));
+
     setState(() {
-      // _info = res;
+      _info = res;
     });
   }
 

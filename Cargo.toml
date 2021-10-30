@@ -23,10 +23,11 @@ tonic-web = "0.2"
 http = "0.2"
 http-body = "0.4.2"
 hyper = {version = "0.14", features = ["full"]}
-futures = "*"
-tower = "*"
-
-warp = "*"
+reqwest = "0.11.6"
+futures = "0.3.17"
+tower = "0.4.10"
+bytes = "1.1.0"
+warp = "0.3.1"
 
 [build-dependencies]
 tonic-build = "0.6"
