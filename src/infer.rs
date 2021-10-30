@@ -69,7 +69,12 @@ pub struct WebResponse {
 }
 #[doc = r" Generated client implementations."]
 pub mod infer_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct InferClient<T> {
@@ -77,12 +82,19 @@ pub mod infer_client {
     }
     impl InferClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        pub async fn connect<D>(
+            dst: D,
+        ) -> Result<Self, tonic::transport::Error>
         where
-            D: std::convert::TryInto<tonic::transport::Endpoint>,
+            D: std::convert::TryInto<
+                tonic::transport::Endpoint,
+            >,
             D::Error: Into<StdError>,
         {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            let conn =
+                tonic::transport::Endpoint::new(dst)?
+                    .connect()
+                    .await?;
             Ok(Self::new(conn))
         }
     }
@@ -91,7 +103,8 @@ pub mod infer_client {
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error:
+            Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -106,13 +119,19 @@ pub mod infer_client {
             T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    <T as tonic::client::GrpcService<
+                        tonic::body::BoxBody,
+                    >>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
-            InferClient::new(InterceptedService::new(inner, interceptor))
+            InferClient::new(InterceptedService::new(
+                inner,
+                interceptor,
+            ))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -129,23 +148,40 @@ pub mod infer_client {
         }
         pub async fn infer(
             &mut self,
-            request: impl tonic::IntoRequest<super::InferRequest>,
-        ) -> Result<tonic::Response<super::InferResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<
+                super::InferRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::InferResponse>,
+            tonic::Status,
+        > {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
+                    format!(
+                        "Service was not ready: {}",
+                        e.into()
+                    ),
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/infer.Infer/Infer");
-            self.inner.unary(request.into_request(), path, codec).await
+            let path = http::uri::PathAndQuery::from_static(
+                "/infer.Infer/Infer",
+            );
+            self.inner
+                .unary(request.into_request(), path, codec)
+                .await
         }
     }
 }
 #[doc = r" Generated client implementations."]
 pub mod process_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct ProcessClient<T> {
@@ -153,12 +189,19 @@ pub mod process_client {
     }
     impl ProcessClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        pub async fn connect<D>(
+            dst: D,
+        ) -> Result<Self, tonic::transport::Error>
         where
-            D: std::convert::TryInto<tonic::transport::Endpoint>,
+            D: std::convert::TryInto<
+                tonic::transport::Endpoint,
+            >,
             D::Error: Into<StdError>,
         {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            let conn =
+                tonic::transport::Endpoint::new(dst)?
+                    .connect()
+                    .await?;
             Ok(Self::new(conn))
         }
     }
@@ -167,7 +210,8 @@ pub mod process_client {
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error:
+            Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -182,13 +226,19 @@ pub mod process_client {
             T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    <T as tonic::client::GrpcService<
+                        tonic::body::BoxBody,
+                    >>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
-            ProcessClient::new(InterceptedService::new(inner, interceptor))
+            ProcessClient::new(InterceptedService::new(
+                inner,
+                interceptor,
+            ))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -205,37 +255,66 @@ pub mod process_client {
         }
         pub async fn pre_process(
             &mut self,
-            request: impl tonic::IntoRequest<super::PreProcessRequest>,
-        ) -> Result<tonic::Response<super::PreProcessResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<
+                super::PreProcessRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::PreProcessResponse>,
+            tonic::Status,
+        > {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
+                    format!(
+                        "Service was not ready: {}",
+                        e.into()
+                    ),
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/infer.Process/PreProcess");
-            self.inner.unary(request.into_request(), path, codec).await
+            let path = http::uri::PathAndQuery::from_static(
+                "/infer.Process/PreProcess",
+            );
+            self.inner
+                .unary(request.into_request(), path, codec)
+                .await
         }
         pub async fn post_process(
             &mut self,
-            request: impl tonic::IntoRequest<super::PostProcessRequest>,
-        ) -> Result<tonic::Response<super::PostProcessResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<
+                super::PostProcessRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::PostProcessResponse>,
+            tonic::Status,
+        > {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
+                    format!(
+                        "Service was not ready: {}",
+                        e.into()
+                    ),
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/infer.Process/PostProcess");
-            self.inner.unary(request.into_request(), path, codec).await
+            let path = http::uri::PathAndQuery::from_static(
+                "/infer.Process/PostProcess",
+            );
+            self.inner
+                .unary(request.into_request(), path, codec)
+                .await
         }
     }
 }
 #[doc = r" Generated client implementations."]
 pub mod web_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct WebClient<T> {
@@ -243,12 +322,19 @@ pub mod web_client {
     }
     impl WebClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        pub async fn connect<D>(
+            dst: D,
+        ) -> Result<Self, tonic::transport::Error>
         where
-            D: std::convert::TryInto<tonic::transport::Endpoint>,
+            D: std::convert::TryInto<
+                tonic::transport::Endpoint,
+            >,
             D::Error: Into<StdError>,
         {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            let conn =
+                tonic::transport::Endpoint::new(dst)?
+                    .connect()
+                    .await?;
             Ok(Self::new(conn))
         }
     }
@@ -257,25 +343,35 @@ pub mod web_client {
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error:
+            Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> WebClient<InterceptedService<T, F>>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> WebClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    <T as tonic::client::GrpcService<
+                        tonic::body::BoxBody,
+                    >>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
-            WebClient::new(InterceptedService::new(inner, interceptor))
+            WebClient::new(InterceptedService::new(
+                inner,
+                interceptor,
+            ))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -293,22 +389,37 @@ pub mod web_client {
         pub async fn process(
             &mut self,
             request: impl tonic::IntoRequest<super::WebRequest>,
-        ) -> Result<tonic::Response<super::WebResponse>, tonic::Status> {
+        ) -> Result<
+            tonic::Response<super::WebResponse>,
+            tonic::Status,
+        > {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
+                    format!(
+                        "Service was not ready: {}",
+                        e.into()
+                    ),
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/infer.Web/Process");
-            self.inner.unary(request.into_request(), path, codec).await
+            let path = http::uri::PathAndQuery::from_static(
+                "/infer.Web/Process",
+            );
+            self.inner
+                .unary(request.into_request(), path, codec)
+                .await
         }
     }
 }
 #[doc = r" Generated server implementations."]
 pub mod infer_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[doc = "Generated trait containing gRPC methods that should be implemented for use with InferServer."]
     #[async_trait]
@@ -316,7 +427,10 @@ pub mod infer_server {
         async fn infer(
             &self,
             request: tonic::Request<super::InferRequest>,
-        ) -> Result<tonic::Response<super::InferResponse>, tonic::Status>;
+        ) -> Result<
+            tonic::Response<super::InferResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct InferServer<T: Infer> {
@@ -331,59 +445,91 @@ pub mod infer_server {
             let inner = _Inner(inner);
             Self {
                 inner,
-                accept_compression_encodings: Default::default(),
-                send_compression_encodings: Default::default(),
+                accept_compression_encodings:
+                    Default::default(),
+                send_compression_encodings:
+                    Default::default(),
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
-            InterceptedService::new(Self::new(inner), interceptor)
+            InterceptedService::new(
+                Self::new(inner),
+                interceptor,
+            )
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for InferServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>>
+        for InferServer<T>
     where
         T: Infer,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
+        type Response =
+            http::Response<tonic::body::BoxBody>;
         type Error = Never;
-        type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        type Future =
+            BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
-        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+        fn call(
+            &mut self,
+            req: http::Request<B>,
+        ) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
                 "/infer.Infer/Infer" => {
                     #[allow(non_camel_case_types)]
                     struct InferSvc<T: Infer>(pub Arc<T>);
-                    impl<T: Infer> tonic::server::UnaryService<super::InferRequest> for InferSvc<T> {
-                        type Response = super::InferResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                    impl<T: Infer>
+                        tonic::server::UnaryService<
+                            super::InferRequest,
+                        > for InferSvc<T>
+                    {
+                        type Response =
+                            super::InferResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::InferRequest>,
-                        ) -> Self::Future {
+                            request: tonic::Request<
+                                super::InferRequest,
+                            >,
+                        ) -> Self::Future
+                        {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).infer(request).await };
+                            let fut = async move {
+                                (*inner)
+                                    .infer(request)
+                                    .await
+                            };
                             Box::pin(fut)
                         }
                     }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
+                    let accept_compression_encodings =
+                        self.accept_compression_encodings;
+                    let send_compression_encodings =
+                        self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
                         let method = InferSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
+                        let codec = tonic :: codec :: ProstCodec :: default () ;
+                        let mut grpc = tonic :: server :: Grpc :: new (codec) . apply_compression_config (accept_compression_encodings , send_compression_encodings) ;
+                        let res =
+                            grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -392,7 +538,10 @@ pub mod infer_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
+                        .header(
+                            "content-type",
+                            "application/grpc",
+                        )
                         .body(empty_body())
                         .unwrap())
                 }),
@@ -404,8 +553,10 @@ pub mod infer_server {
             let inner = self.inner.clone();
             Self {
                 inner,
-                accept_compression_encodings: self.accept_compression_encodings,
-                send_compression_encodings: self.send_compression_encodings,
+                accept_compression_encodings: self
+                    .accept_compression_encodings,
+                send_compression_encodings: self
+                    .send_compression_encodings,
             }
         }
     }
@@ -415,29 +566,49 @@ pub mod infer_server {
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut std::fmt::Formatter<'_>,
+        ) -> std::fmt::Result {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: Infer> tonic::transport::NamedService for InferServer<T> {
+    impl<T: Infer> tonic::transport::NamedService
+        for InferServer<T>
+    {
         const NAME: &'static str = "infer.Infer";
     }
 }
 #[doc = r" Generated server implementations."]
 pub mod process_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[doc = "Generated trait containing gRPC methods that should be implemented for use with ProcessServer."]
     #[async_trait]
     pub trait Process: Send + Sync + 'static {
         async fn pre_process(
             &self,
-            request: tonic::Request<super::PreProcessRequest>,
-        ) -> Result<tonic::Response<super::PreProcessResponse>, tonic::Status>;
+            request: tonic::Request<
+                super::PreProcessRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::PreProcessResponse>,
+            tonic::Status,
+        >;
         async fn post_process(
             &self,
-            request: tonic::Request<super::PostProcessRequest>,
-        ) -> Result<tonic::Response<super::PostProcessResponse>, tonic::Status>;
+            request: tonic::Request<
+                super::PostProcessRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::PostProcessResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct ProcessServer<T: Process> {
@@ -452,90 +623,141 @@ pub mod process_server {
             let inner = _Inner(inner);
             Self {
                 inner,
-                accept_compression_encodings: Default::default(),
-                send_compression_encodings: Default::default(),
+                accept_compression_encodings:
+                    Default::default(),
+                send_compression_encodings:
+                    Default::default(),
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
-            InterceptedService::new(Self::new(inner), interceptor)
+            InterceptedService::new(
+                Self::new(inner),
+                interceptor,
+            )
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ProcessServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>>
+        for ProcessServer<T>
     where
         T: Process,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
+        type Response =
+            http::Response<tonic::body::BoxBody>;
         type Error = Never;
-        type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        type Future =
+            BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
-        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+        fn call(
+            &mut self,
+            req: http::Request<B>,
+        ) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
                 "/infer.Process/PreProcess" => {
                     #[allow(non_camel_case_types)]
-                    struct PreProcessSvc<T: Process>(pub Arc<T>);
-                    impl<T: Process> tonic::server::UnaryService<super::PreProcessRequest> for PreProcessSvc<T> {
-                        type Response = super::PreProcessResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                    struct PreProcessSvc<T: Process>(
+                        pub Arc<T>,
+                    );
+                    impl<T: Process>
+                        tonic::server::UnaryService<
+                            super::PreProcessRequest,
+                        > for PreProcessSvc<T>
+                    {
+                        type Response =
+                            super::PreProcessResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::PreProcessRequest>,
-                        ) -> Self::Future {
+                            request: tonic::Request<
+                                super::PreProcessRequest,
+                            >,
+                        ) -> Self::Future
+                        {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).pre_process(request).await };
+                            let fut = async move {
+                                (*inner)
+                                    .pre_process(request)
+                                    .await
+                            };
                             Box::pin(fut)
                         }
                     }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
+                    let accept_compression_encodings =
+                        self.accept_compression_encodings;
+                    let send_compression_encodings =
+                        self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
                         let method = PreProcessSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
+                        let codec = tonic :: codec :: ProstCodec :: default () ;
+                        let mut grpc = tonic :: server :: Grpc :: new (codec) . apply_compression_config (accept_compression_encodings , send_compression_encodings) ;
+                        let res =
+                            grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
                 }
                 "/infer.Process/PostProcess" => {
                     #[allow(non_camel_case_types)]
-                    struct PostProcessSvc<T: Process>(pub Arc<T>);
-                    impl<T: Process> tonic::server::UnaryService<super::PostProcessRequest> for PostProcessSvc<T> {
-                        type Response = super::PostProcessResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                    struct PostProcessSvc<T: Process>(
+                        pub Arc<T>,
+                    );
+                    impl<T: Process>
+                        tonic::server::UnaryService<
+                            super::PostProcessRequest,
+                        > for PostProcessSvc<T>
+                    {
+                        type Response =
+                            super::PostProcessResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::PostProcessRequest>,
-                        ) -> Self::Future {
+                            request: tonic::Request<
+                                super::PostProcessRequest,
+                            >,
+                        ) -> Self::Future
+                        {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).post_process(request).await };
+                            let fut = async move {
+                                (*inner)
+                                    .post_process(request)
+                                    .await
+                            };
                             Box::pin(fut)
                         }
                     }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
+                    let accept_compression_encodings =
+                        self.accept_compression_encodings;
+                    let send_compression_encodings =
+                        self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
                         let method = PostProcessSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
+                        let codec = tonic :: codec :: ProstCodec :: default () ;
+                        let mut grpc = tonic :: server :: Grpc :: new (codec) . apply_compression_config (accept_compression_encodings , send_compression_encodings) ;
+                        let res =
+                            grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -544,7 +766,10 @@ pub mod process_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
+                        .header(
+                            "content-type",
+                            "application/grpc",
+                        )
                         .body(empty_body())
                         .unwrap())
                 }),
@@ -556,8 +781,10 @@ pub mod process_server {
             let inner = self.inner.clone();
             Self {
                 inner,
-                accept_compression_encodings: self.accept_compression_encodings,
-                send_compression_encodings: self.send_compression_encodings,
+                accept_compression_encodings: self
+                    .accept_compression_encodings,
+                send_compression_encodings: self
+                    .send_compression_encodings,
             }
         }
     }
@@ -567,17 +794,27 @@ pub mod process_server {
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut std::fmt::Formatter<'_>,
+        ) -> std::fmt::Result {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: Process> tonic::transport::NamedService for ProcessServer<T> {
+    impl<T: Process> tonic::transport::NamedService
+        for ProcessServer<T>
+    {
         const NAME: &'static str = "infer.Process";
     }
 }
 #[doc = r" Generated server implementations."]
 pub mod web_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::let_unit_value
+    )]
     use tonic::codegen::*;
     #[doc = "Generated trait containing gRPC methods that should be implemented for use with WebServer."]
     #[async_trait]
@@ -585,7 +822,10 @@ pub mod web_server {
         async fn process(
             &self,
             request: tonic::Request<super::WebRequest>,
-        ) -> Result<tonic::Response<super::WebResponse>, tonic::Status>;
+        ) -> Result<
+            tonic::Response<super::WebResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct WebServer<T: Web> {
@@ -600,59 +840,90 @@ pub mod web_server {
             let inner = _Inner(inner);
             Self {
                 inner,
-                accept_compression_encodings: Default::default(),
-                send_compression_encodings: Default::default(),
+                accept_compression_encodings:
+                    Default::default(),
+                send_compression_encodings:
+                    Default::default(),
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
-            InterceptedService::new(Self::new(inner), interceptor)
+            InterceptedService::new(
+                Self::new(inner),
+                interceptor,
+            )
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for WebServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>>
+        for WebServer<T>
     where
         T: Web,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
+        type Response =
+            http::Response<tonic::body::BoxBody>;
         type Error = Never;
-        type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        type Future =
+            BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
-        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+        fn call(
+            &mut self,
+            req: http::Request<B>,
+        ) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
                 "/infer.Web/Process" => {
                     #[allow(non_camel_case_types)]
                     struct ProcessSvc<T: Web>(pub Arc<T>);
-                    impl<T: Web> tonic::server::UnaryService<super::WebRequest> for ProcessSvc<T> {
+                    impl<T: Web>
+                        tonic::server::UnaryService<
+                            super::WebRequest,
+                        > for ProcessSvc<T>
+                    {
                         type Response = super::WebResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::WebRequest>,
-                        ) -> Self::Future {
+                            request: tonic::Request<
+                                super::WebRequest,
+                            >,
+                        ) -> Self::Future
+                        {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).process(request).await };
+                            let fut = async move {
+                                (*inner)
+                                    .process(request)
+                                    .await
+                            };
                             Box::pin(fut)
                         }
                     }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
+                    let accept_compression_encodings =
+                        self.accept_compression_encodings;
+                    let send_compression_encodings =
+                        self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
                         let method = ProcessSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
+                        let codec = tonic :: codec :: ProstCodec :: default () ;
+                        let mut grpc = tonic :: server :: Grpc :: new (codec) . apply_compression_config (accept_compression_encodings , send_compression_encodings) ;
+                        let res =
+                            grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -661,7 +932,10 @@ pub mod web_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
+                        .header(
+                            "content-type",
+                            "application/grpc",
+                        )
                         .body(empty_body())
                         .unwrap())
                 }),
@@ -673,8 +947,10 @@ pub mod web_server {
             let inner = self.inner.clone();
             Self {
                 inner,
-                accept_compression_encodings: self.accept_compression_encodings,
-                send_compression_encodings: self.send_compression_encodings,
+                accept_compression_encodings: self
+                    .accept_compression_encodings,
+                send_compression_encodings: self
+                    .send_compression_encodings,
             }
         }
     }
@@ -684,11 +960,16 @@ pub mod web_server {
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut std::fmt::Formatter<'_>,
+        ) -> std::fmt::Result {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: Web> tonic::transport::NamedService for WebServer<T> {
+    impl<T: Web> tonic::transport::NamedService
+        for WebServer<T>
+    {
         const NAME: &'static str = "infer.Web";
     }
 }

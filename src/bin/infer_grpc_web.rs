@@ -23,23 +23,30 @@ use hello_tf::process_client::ProcessClient;
 use tonic::transport::Channel;
 
 fn main() {
-    let rt = Builder::new_current_thread().enable_all().build().unwrap();
+    let rt = Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .unwrap();
 
     rt.block_on(async {
         let addr = "0.0.0.0:3001";
-        println!("Listen on: {}", addr);
+        if std::env::var_os("RUST_LOG").is_none() {
+            std::env::set_var("RUST_LOG", "example_multipart_form=debug,tower_http=debug")
+        }
+        tracing_subscriber::fmt::init();
+        tracing::info!("listening on {}", addr);
 
         let addr = addr.parse().unwrap();
-        let server = WebServer::new(WebImpl {
-            icli: InferClient::connect("http://localhost:5000").await.unwrap(),
-            pcli: ProcessClient::connect("http://localhost:5001")
+        let app = WebServer::new(WebImpl {
+            infer_cli: InferClient::connect("http://localhost:5000").await.unwrap(),
+            process_cli: ProcessClient::connect("http://localhost:5001")
                 .await
                 .unwrap(),
         });
 
         let app = tonic_web::config()
             .allow_origins(vec!["0.0.0.0"])
-            .enable(server);
+            .enable(app);
 
         Server::builder()
             .accept_http1(true)
@@ -51,20 +58,26 @@ fn main() {
 }
 
 struct WebImpl {
-    icli: InferClient<Channel>,
-    pcli: ProcessClient<Channel>,
+    infer_cli: InferClient<Channel>,
+    process_cli: ProcessClient<Channel>,
 }
 
 #[async_trait]
 impl Web for WebImpl {
-    async fn process(&self, req: Request<WebRequest>) -> Result<Response<WebResponse>, Status> {
+    async fn process(
+        &self,
+        req: Request<WebRequest>,
+    ) -> Result<Response<WebResponse>, Status> {
         let mut results = vec![];
-        let mut icli = self.icli.clone();
-        let mut pcli = self.pcli.clone();
+        let mut icli = self.infer_cli.clone();
+        let mut pcli = self.process_cli.clone();
         for img in req.into_inner().images {
-            let PreProcessResponse { shape, data } = pre_process(&mut pcli, &img.body).await;
-            let InferResponse { shape, data } = infer(&mut icli, shape, data).await;
-            let PostProcessResponse { preds } = post_process(&mut pcli, shape, data).await;
+            let PreProcessResponse { shape, data } =
+                pre_process(&mut pcli, &img.body).await;
+            let InferResponse { shape, data } =
+                infer(&mut icli, shape, data).await;
+            let PostProcessResponse { preds } =
+                post_process(&mut pcli, shape, data).await;
             let preds: Vec<_> = preds
                 .into_iter()
                 .map(|p| Pred {
@@ -82,12 +95,19 @@ impl Web for WebImpl {
     }
 }
 
-async fn pre_process(cli: &mut ProcessClient<Channel>, data: &[u8]) -> PreProcessResponse {
+async fn pre_process(
+    cli: &mut ProcessClient<Channel>,
+    data: &[u8],
+) -> PreProcessResponse {
     let req = PreProcessRequest { image: data.into() };
     cli.pre_process(req).await.unwrap().into_inner()
 }
 
-async fn infer(cli: &mut InferClient<Channel>, shape: Vec<u64>, data: Vec<f32>) -> InferResponse {
+async fn infer(
+    cli: &mut InferClient<Channel>,
+    shape: Vec<u64>,
+    data: Vec<f32>,
+) -> InferResponse {
     let req = InferRequest { shape, data };
     cli.infer(req).await.unwrap().into_inner()
 }
